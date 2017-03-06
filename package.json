@@ -1,0 +1,35 @@
+{
+  "name": "emergency-quest-timer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "lsc bin/serve.ls",
+    "test": "mocha --compilers ls:livescript"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miyabisun/emergency-quest-timer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miyabisun/emergency-quest-timer/issues"
+  },
+  "homepage": "https://github.com/miyabisun/emergency-quest-timer#readme",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "express": "^4.15.1",
+    "feedparser": "^2.1.0",
+    "moment": "^2.17.1",
+    "request": "^2.80.0",
+    "simple-git": "^1.67.0",
+    "superagent": "^3.5.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "recursive-readdir-sync": "^1.0.6"
+  }
+}
