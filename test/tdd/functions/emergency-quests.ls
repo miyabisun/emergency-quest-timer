@@ -10,17 +10,17 @@ describe filename, ->
   params = {}
   before (done)!->
     @timeout 5_000ms
-    err, html <- main.get-html
-    params <<< {err, html}
+    url = "http://pso2.jp/players/news/?mode=view&id=11114"
+    err, html <- main.get-html-of url
+    params <<< {err, html, url}
     done!
 
   specify \is-object ->
     main |> expect >> (.to.be.a \object)
 
-  describe \get-html ->
+  describe \get-html-of ->
     specify \is-string ->
-      params.html
-      |> expect >> (.to.be.a \string)
+      params.html |> expect >> (.to.be.a \string)
 
   describe \days ->
     specify \is_array ->

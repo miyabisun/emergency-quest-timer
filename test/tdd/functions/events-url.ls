@@ -33,6 +33,9 @@ describe filename, ->
       params.rss |> expect >> (.to.be.an \array)
     specify \children_is_object ->
       params.rss |> each expect >> (.to.be.a \object)
+    specify.skip \output-title-link ->
+      params.rss |> each ({title})->
+        console.log title
 
   describe \event-url ->
     params = {}

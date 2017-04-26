@@ -1,5 +1,6 @@
 require! {
-  cheerio, moment
+  cheerio
+  \moment-timezone : moment
   superagent: request
   \./events-url.ls
   \prelude-ls : {map, filter, fold, flatten}
@@ -7,10 +8,10 @@ require! {
 
 module.exports =
   get-data: (cb)->
-    err, html <~ @get-html
-    cb @parse html
-  get-html: (cb)->
-    url <- events-url.get-url
+    url <~ events-url.get-url
+    err, body <~ @get-html-of url
+    cb @parse body
+  get-html-of: (url, cb)->
     request
       .get url
       .end (err, {text}:res)->
@@ -30,11 +31,11 @@ module.exports =
     $ = cheerio.load body
     $title = $ \#boost
       .find \h3
-      .filter (_, it)-> $ it .text! is "イベントスケジュール"
+      .filter (_, it)-> $ it .text! is /イベントスケジュール$/
     days = $title
       .next-until \h3
       .filter \h4
-      .filter (_, it)-> $ it .text! is /\d{1,2}月\d{1,2}日/
+      .filter (_, it)-> $ it .text! is /^\d{1,2}月\d{1,2}日/
       .map (_, it)->
         name: $ it .text!
         table: $ it .next!.find \table
@@ -50,8 +51,8 @@ module.exports =
         name: $ it .find \td .not \.icon .text! |> (- /[「」]/g)
       .get!
   moment: (day, time)->
-    this-month = moment!.start-of \month
-    target = moment "#{day.replace /^(\d{1,2})月(\d{1,2}).*/, "$1-$2"} #time", "MM-DD HH:mm"
+    this-month = moment!.tz \Asia/Tokyo .start-of \month
+    target = moment "#{day.replace /^(\d{1,2})月(\d{1,2}).*/, "$1-$2"} #time", "MM-DD HH:mm" .tz \Asia/Tokyo
     target.add 1, \y if target.is-before this-month
     return target
 

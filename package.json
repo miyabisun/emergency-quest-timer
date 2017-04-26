@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "lsc bin/serve.ls",
+    "update": "lsc bin/update.ls",
+    "build": "webpack",
     "test": "mocha --compilers ls:livescript"
   },
   "repository": {
@@ -23,13 +25,20 @@
     "express": "^4.15.1",
     "feedparser": "^2.1.0",
     "moment": "^2.17.1",
+    "moment-timezone": "^0.5.11",
+    "prelude-ls": "^1.1.2",
+    "pug": "^2.0.0-beta11",
+    "react": "^15.4.2",
     "request": "^2.80.0",
     "simple-git": "^1.67.0",
     "superagent": "^3.5.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "livescript": "^1.5.0",
+    "livescript-loader": "^0.1.6",
     "mocha": "^3.2.0",
-    "recursive-readdir-sync": "^1.0.6"
+    "recursive-readdir-sync": "^1.0.6",
+    "webpack": "^2.2.1"
   }
 }
